@@ -13,7 +13,7 @@
     text-decoration: none;
     text-transform: none;
     transform: .2s linear;
-
+    color: white;
 
 }
 
@@ -51,8 +51,8 @@ html::-webkit-scrollbar-track
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem 9%;
-
+    
+    
 
 }
 
@@ -63,56 +63,26 @@ html::-webkit-scrollbar-track
 
 }
 
-#menu-bars{
-    font-size: 3rem;
-    color: #fff;
-    cursor: pointer;
-    display: none;
 
-}
-
-@media (max-width: 991px)
+.navbar
 {
-
-    html{
-        font-size: 55%;
-
-    
-    }
-    .header{
-        padding: 1.5rem 2rem;
-
-    }
-
-}
-
-@media (max-width: 768px)
-{
-#menu-bars{
-display: initial;
-
-}
-
-.header .navbar
-{position: absolute;
-    top: 0;left: 0;right: 0;
-    
-    border-top: .1rem solid #222;
-    background: #333;
-    clip-path: polygon(0 0 , 100% 0, 100% 0, 0 0);
+    display: flex;
+    justify-content: end;
     
 }
 
 .header .navbar a{
     display: flex;
     background: #222;
-    border-radius: .5 rem;
+    
+    border-radius: 5rem;
     padding: 1.3 rem;
+    padding: 10px;
     margin: 1.3rem;
     font-size: 2.5 rem;
 
 }
-}
+
 
 @media (max-width: 450px)
 {
@@ -124,4 +94,375 @@ display: initial;
     }
     
 
+}
+
+
+
+.navbar{
+    font-size: 1.5rem;
+}
+
+#section1{
+    height: 100vh;
+    width: 100vw;
+    background-color: #222;
+}
+h3 
+{
+    padding-top:  5.5em ;
+    font-size: 2rem;
+    text-align: center; 
+    
+}
+
+#title{
+    border: 2px solid gray;
+    border-radius: 20px;
+    padding: 20px ;
+    margin: auto;
+
+    /* padding-bottom: 20px; */
+    width: fit-content;
+
+}
+h3 span
+{
+
+color: rgb(7, 104, 250);
+
+}
+.section1 .slider-container
+{
+    height: 3rem;
+    
+    
+}
+
+.swiper-slide img
+{
+height: 35rem;
+
+object-fit: cover;
+border-radius: 10%  ;
+}
+.home-slider .swiper-slide{
+    width: 100%;
+    height: 100%;
+    
+    border-radius: .5rem;
+    padding-top: 20px;
+}
+
+#gallery
+{
+height: 100vh;
+width: 100vw;
+background-color: #333;
+
+}
+
+
+.hoverText
+{
+    opacity: 0;
+    transition: all 1s;
+}
+
+.swiper-slide img:hover .hoverText
+{
+opacity: 1;
+}
+#book{
+    color: white;
+    font-size: large;   
+
+}
+#book span{
+    color: rgb(7, 104, 250);
+    transition: all 1s;
+}
+
+
+#gallery
+{ padding-top:  100px;
+   background-color: #322;
+
+    opacity: 1;
+      transition: opacity 1s ease-in-out;
+
+}
+
+#gallery h2{
+    text-align: center;
+    font-size: 3rem;
+}
+
+
+#s2{
+
+    float: inline-end;
+}
+#circlesContainer 
+{
+    margin-top: 30px;
+    display: flex;
+    gap: 10%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#circlesContainer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    text-shadow: 0 0 3px cyan;
+    margin-top: 10px;
+}
+#circlesContainer span
+{
+    font-size: 13px;
+    text-align: center;
+    border: 2px dotted white;
+    box-shadow: 0 0 10px white;
+    border-radius: 50%;
+    width: 150px;
+    display: block;
+    height: 150px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+}
+#s1 span
+{box-shadow: 0 0 10px rgb(251, 90, 90);
+}
+
+#s2 span
+{box-shadow: 0 0 10px rgb(127, 243, 44);
+}
+#s3 span
+{box-shadow: 0 0 10px rgb(241, 119, 48);
+}
+
+#s1, #s2, #s3
+{
+    opacity: 0;
+    transition: all 1s ease-in-out;
+
+}
+#s2
+{
+    position: absolute;
+    top: 80%;
+}
+h2 button
+{
+    background-color: #333;
+    padding: 2px;
+    color: white;
+    border: 1px solid cyan;
+    width: 30px;
+    font-size: large;
+    transition: all .5s;
+}
+h2 button:hover{
+color: black;
+background-color: white;
+border-color: cyan;
+}
+h2 button:active
+{
+background-color: #1b204d;
+}
+.logo{
+    font-size: 13px;
+    padding-right: 100px;    
+    position: absolute;
+    left: 10px;
+    
+}
+#E360{
+color: #3867d6;
+
+position: absolute;
+animation: rotate 5s  ;
+animation-iteration-count: 1;
+transition: all 1s;
+transform-origin: top left;
+transform-style: preserve-3d;
+box-sizing: border-box;
+padding-left: 3px;
+overflow: hidden;
+
+}
+@keyframes rotate {
+    
+    0%{
+        opacity: 0;
+        rotate: 100deg;
+
+    }
+    50% {
+        opacity: 1;
+        transform: translate3d(7px, -129px, 3px);
+    }
+    100% {
+        rotate: 359deg;
+        text-shadow: 0 0 3px black;
+    }
+
+}
+
+
+.eventPlanner{
+    border: 2px solid gray;
+    border-radius: 20px;
+    padding: 20px ;
+    padding-right: 40px;
+    text-shadow: 0 0 3px black;
+    margin: auto;
+    transition: all 1s ease-in-out;
+}
+
+.eventPlanner:hover {
+    border-color: rgb(35, 106, 206);
+    color: #3867d6;
+}
+.eventPlanner:hover #E360
+{
+    color: white;
+}
+
+
+button, a{
+        cursor: pointer;
+}
+
+/* form css */
+
+.contact-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	height: 350px;
+	padding: 80px 40px;
+	background: rgba(0, 0, 0, 0.5);
+}
+.avatar {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	overflow: hidden;
+	top: calc(-80px/2);
+	left: 190px;
+}
+.contact-form h2 {
+	margin: 0;
+	padding: 0 0 20px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+}
+.contact-form p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: #fff;
+}
+.contact-form input {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.contact-form input[type=email], .contact-form input[type=password] {
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+}
+.contact-form input[type=submit] {
+	height: 30px;
+	color: #fff;
+	font-size: 15px;
+	background: #3867d6;
+	cursor: pointer;
+	border-radius: 25px;
+	border: none;
+	outline: none;
+	margin-top: 15%;
+}
+.contact-form a {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+input[type=checkbox] {
+	width: 20%;
+}
+
+
+.contact-form, .avatar{
+    display: none;
+    opacity: 0;
+    transition: all 1s;
+}
+.contact-form:active {
+    position: fixed;
+
+}
+
+.formContainer{
+    height: 100%;
+    width: 100%;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    position: fixed;
+
+    /* -webkit-filter: blur(10px);
+	/* -moz-filter: blur(10px); */
+	
+    background: url("https://www.splitshire.com/wp-content/uploads/2014/11/SplitShire-03692-1800x1200.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: none;
+    transition: all 1s;
+    opacity: 0;
+    
+
+}
+.contact-form{
+    position: fixed;
+
+    z-index: 300;
+}
+#closeForm{
+    color: red;
+    background-color: black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+#toggle-btn{
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 9px;
+}
+#cirLog:hover
+{
+    cursor: pointer;
+    
 }

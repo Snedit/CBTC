@@ -4,7 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="static/style.css" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'style.css')}}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -14,20 +23,131 @@
     />
   </head>
   <body>
+    <div class="formContainer">
+      <div class="contact-form">
+        <button onclick="closeForm()" id="closeForm">X</button>
+        <h2 id="form-title">LOGIN</h2>
+        <form action="/submit" id="myform">
+          <p id="nameP">Name</p>
+          <input id="name-field" placeholder="Enter your name" type="email" />
+          <p>Email</p>
+          <input id="email" placeholder="Enter Email" type="email" />
+          <p>Password</p>
+          <input id="password" placeholder="Enter Password" type="password" />
+          <input
+            id="submit-btn"
+            onclick="submitForm()"
+            type="submit"
+            value="Sign in"
+          />
+        </form>
+        <button id="toggle-btn" onclick="toggleForm()">Sign Up</button>
+      </div>
+    </div>
     <!-- Header section -->
     <header class="header">
-      <a href="" class="logo"></a>
+      <a href="" class="logo">
+        <span id="" class="eventPlanner">
+          EVENT PLANNER
+          <span id="E360"> 360</span>
+        </span>
+      </a>
 
       <nav class="navbar">
-        <a href="" id="home"></a>
-        <a href="" id="service"></a>
-        <a href="" id="about"></a>
-        <a href="" id="My events"></a>
-        <a href="" id=""></a>
+        <a href="" id="home">Home</a>
+        <a href="#section1" id="service">Services</a>
+        <a href="#gallery" id="about">About</a>
+        <a href="" id="My events">My events</a>
+        <a onclick="showForm()" id="Login">Login</a>
       </nav>
-      <div id="menu-bars" class="fa-bars fas"></div>
     </header>
+    <section id="section1">
+      <div class="content">
+        <h3>
+          <div id="title">
+            <span> E</span>vent Planner 360: One solution to <span> E</span>vent
+            Management
+          </div>
 
-    <script src="static/script.js"></script>
+          <div class="swiper-container home-slider">
+            <div class="swiper-wrapper wrapper">
+              <div class="swiper-slide slide">
+                <img
+                  src="https://e1.pxfuel.com/desktop-wallpaper/69/2/desktop-wallpaper-concert-crowd-people-light-laser-party-party-lights-thumbnail.jpg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="swiper-slide slide">
+                <img
+                  src="https://t3.ftcdn.net/jpg/01/95/85/78/360_F_195857809_w1J8RvjXS9ojKUgqex3N0b3Zt2zcfVQS.jpg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="swiper-slide slide">
+                <img
+                  src="https://t3.ftcdn.net/jpg/04/86/75/48/360_F_486754889_oUlE8eUmEgQ8k3R6OmIf1K9TUrhyYEfn.jpg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="https://wannaparty.in/wp-content/uploads/2021/08/Artboard-1-4-3.jpg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="swiper-slide slide">
+                <img
+                  src="https://c4.wallpaperflare.com/wallpaper/544/380/56/microphone-music-singing-instrument-wallpaper-thumb.jpg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="swiper-slide slide">
+                <img
+                  src="https://i0.wp.com/e-discoveryteam.com/wp-content/uploads/2023/05/digital_art_image_of_an_ethical_hacker_doing_software.png?resize=450%2C450&ssl=1"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+            </div>
+            <p id="book">Book any <span id="booking-info">Event</span></p>
+          </div>
+        </h3>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <h2 id="use">How to use <button onclick="reveal()">?</button></h2>
+      <div id="circlesContainer">
+        <div id="s1">
+          <span id="cirLog" onclick="showForm()"
+            >Login or Register if you're new</span
+          >
+          <p>Step 1:</p>
+        </div>
+
+        <div id="s2">
+          <span>
+            Click on my events to plan events or see the previous ones.
+          </span>
+          <p>Step 2:</p>
+        </div>
+
+        <div id="s3">
+          <span> It's that simple </span>
+          <p>Step 3:</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about"></section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{url_for('static', filename = 'script.js')}}"></script>
+    <script src="{{url_for('static', filename = 'form.js')}}"></script>
   </body>
 </html>
