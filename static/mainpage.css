@@ -1,0 +1,316 @@
+.header, .navbar
+{
+    background-color: transparent;
+
+}
+
+.header .navbar a{
+background-color: transparent;
+transition: all 1s;
+
+
+}
+.header .navbar a:active{
+    border-bottom: #fff;
+}
+
+.header .navbar a:hover{
+
+    background-color: #ffffff53;
+}
+
+#coverPic
+{
+    background: url("https://img.freepik.com/free-vector/gradient-dynamic-purple-lines-background_23-2148995757.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+}
+
+#UserWelcome{
+    padding-top: 100px;
+}
+
+.welcome h1{
+ font-size: 5rem;
+ text-align: center;
+ font-weight: bold;
+ font-family:'Arial Narrow Bold', sans-serif ;
+}
+.welcome h1 span{
+    
+    -webkit-text-stroke-width: 1px; /* Outline border width */
+            -webkit-text-stroke-color: #ffffff;
+    color: transparent;
+}
+
+.active{
+    transition: all 2s;
+border-bottom: 2px solid #fff;
+}
+#trendGrid{
+    border: 2px solid white;
+    width: 90%;
+    margin: auto;
+    height: fit-content;
+    padding: 10px;
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  
+}
+
+
+.card img{
+    height: 80%;
+    width: 80%;
+    
+}
+#trending-container
+{   margin-top: 50px;
+    font-size: larger;
+    
+    opacity: 0;
+    transition: all 2s ease-in-out;
+    text-align: center;
+}
+#trendingHeading{
+    font-size: 2em;
+    text-shadow:  0 0 3px rgb(102, 24, 133), 0 0 4px #ee49f7;
+
+}
+.eventSums
+{
+    font-size: 1.2em;
+    color: white;
+    text-shadow:  0 0 .5em  cyan; 
+    
+    
+} */
+
+.eventDate{
+    text-shadow:  0 0 .5em  lightgreen; 
+}
+
+#trendTab{
+    transition : all .5s ease;
+}
+
+#listofevents{
+    padding: 4.5rem;
+    
+
+    padding-left: 2%;
+    display: grid;
+    border: 1px solid white;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    width: 90%;
+    gap: 2rem;
+    text-align: center;
+    margin: auto;
+}
+
+#my-event-container
+{
+    padding: 10rem;
+}
+#my-event-container h2{
+    text-align: center;
+    padding-bottom: 4rem;
+}
+
+
+.eventImg{
+    width: 200px;
+    margin-top: 10px;
+    height: 150px;
+}
+
+.eventHead{
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
+.event{
+    border: 1px solid violet;
+    box-shadow:  0 2px 4px rgba(23, 23, 23, 0.575);
+
+}
+
+.status{
+    font-size: 1.4rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid green;
+    border-radius: 4px;
+    width: fit-content;
+    margin: auto;
+    background-color: limegreen;   
+    
+}
+
+#MyEventTab{
+    display: none;
+    opacity: 0;
+}
+
+.createEvent{
+    border: 1px dotted violet;
+    
+}
+.createEvent img{
+    height: 100px;
+    width: 100px;
+
+    padding: 5px;
+    padding-top: 10px;
+}
+.createEvent p{
+    font-size: 2rem;
+    border: 2px solid lightcyan;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    color: lightgreen;
+    transition: all 1s;
+}
+
+.event:hover 
+{
+    border-color: lightgreen;
+    color: lightcyan;
+}
+
+.event{
+    border-radius: 10px;
+}
+
+.specialForm{
+    background-color: #333;
+    position: fixed;
+    top: 350px;
+    left: 50%;
+    width: fit-content;
+    z-index: 300;
+    transform: translate(-50%, -50%);
+
+
+}
+
+.specialForm img{
+    width: 90%;
+}
+
+#ufo{
+
+position: fixed;
+top:-10%;
+height: 200px;
+left: 50%;
+transform: translate(-50%, -50%);
+animation: toggle 5s 1;
+transition: all 1s;
+
+display: none;
+}
+@keyframes toggle {
+    
+    0%{
+        top: -50%;
+
+    }
+ 50%{
+    top: 24%;
+ }
+ 100%
+ {
+top: -20%;
+ }
+}
+
+
+
+
+.closeEvent
+{
+
+    position: absolute;
+    top: 10px;
+    z-index: 301;
+    right: 10px;
+    padding: 5px;
+    background-color: rgb(217, 25, 25);
+    transform: rotate(90deg);
+
+}
+
+.specialForm{
+    transition: all 2s ease-in-out;
+    opacity: 0;
+    
+    display: none;
+}
+.specialForm img{
+margin: auto;
+}
+
+
+.specialForm{
+    padding: 30px;
+}
+#new-event-form{
+    font-size: large;
+    
+}
+
+#new-event-form input, #new-event-form textarea{
+    color: black;
+    padding: 3px;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 10px;
+}
+#createEventHead{
+    text-align: center;
+    font-size: larger;
+}
+#new-event-form{
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.formField{
+    margin-top: 10px;
+    display:inline-block;
+}
+.addcustom, .eventSub
+{
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    color: rgb(82, 18, 117);
+    border: 2px solid rgb(171, 46, 238);
+    transition: all 1s;
+    font-weight: bold;
+}
+.addcustom:hover
+{
+    color: white   ;
+    background-color: rgb(196, 110, 243);
+    
+}
+.eventSub{
+    color: blue;
+    margin: auto;
+    border-color: rgb(56, 56, 237);
+}
+.eventSub:hover{
+    color: white;
+    background-color: rgb(55, 55, 206);
+}

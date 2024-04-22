@@ -466,3 +466,9 @@ input[type=checkbox] {
     cursor: pointer;
     
 }
+#loginmsg{
+    color: rgb(233, 62, 35);
+    z-index: 900;
+    
+    
+}

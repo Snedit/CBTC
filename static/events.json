@@ -1,0 +1,27 @@
+[
+  {
+    "name": "ETH India",
+    "details": "World's biggest Ethereum Hackathon",
+    "date": "2024-04-14",
+    "imageAddress": "https://devfolio.co/blog/content/images/2021/04/ethindia-1.jpg"
+  },
+  {
+    "name": "HackNITR 5.0",
+    "details": "The official hackathon of NIT roukela",
+    "date": "2024-04-15",
+    "imageAddress": "https://assets.devfolio.co/hackathons/55e8099a6fc149b5bc0571ac823f0551/assets/cover/744.png"
+  },
+  {
+    "name": "Diversion",
+    "details": "A flagship event of IEM Kolkata",
+    "date": "2024-04-16",
+    "imageAddress": "https://media.licdn.com/dms/image/D5622AQEK1ozA4lZF3g/feedshare-shrink_800/0/1700375731221?e=2147483647&v=beta&t=D5haD0IwHc-dF0NyDLuWWMNmijPBRdF2y49vji9UVyc"
+  },
+  {
+    "name": "My future kid's birthday",
+    "details": "Pretty self-explainatory",
+    "date": "2024-04-17",
+    "imageAddress": "https://cdn.firstcry.com/education/2022/12/29111202/101-Of-Planning-An-Unforgettable-Kids-Birthday-Party.jpg"
+  }
+ 
+]

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'style.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'mainpage.css')}}"
+    />
+  </head>
+  <body>
+    <div id="coverPic">
+      <header class="header">
+        <nav class="navbar">
+          <a href="" onclick="showTrending()" class="active" id="trending"
+            >Trending Events</a
+          >
+          <a href="" id="myevents" onclick="showEvent()">My events</a>
+          <a href="" id="notifications" onclick="showNotify()">Notifications</a>
+          <a href="" id="account" onclick="myAccount()">Account</a>
+        </nav>
+      </header>
+
+      <section id="main">
+        <div id="trendTab">
+          <section id="UserWelcome">
+            <div class="welcome">
+              <h1>Welcome <span> {{user.username}} </span>!</h1>
+            </div>
+          </section>
+
+          <!-- this  is the main section which i will edit dynamically -->
+
+          <div id="trending-container">
+            <h2 id="trendingHeading">Trending Events</h2>
+            <div id="trendGrid"></div>
+          </div>
+        </div>
+
+        <div id="MyEventTab">
+          <section id="my-event-container">
+            <h2>My events</h2>
+            <img
+              id="ufo"
+              src="https://static.vecteezy.com/system/resources/thumbnails/027/125/687/small_2x/ufo-alien-isolated-on-transparent-background-futuristic-ufo-spaceship-generative-ai-png.png"
+              alt=""
+              srcset=""
+            />
+            <div class="specialForm"></div>
+            <div id="listofevents">
+              <!-- <div class="event">
+                <a href="">
+                  <img
+                    class="eventImg"
+                    src="https://www.mooc.org/hs-fs/hubfs/learn-programming-career-jpg.jpeg?width=500&name=learn-programming-career-jpg.jpeg"
+                    alt=""
+                  />
+                  <p class="eventHead">Complete the internship in time</p>
+                  <p class="status">Accepted</p>
+                </a>
+              </div>
+               -->
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <script src="{{url_for('static', filename = 'trending.js')}}"></script>
+    <script src="{{url_for('static', filename = 'mainpage.js')}}"></script>
+    <script src="{{url_for('static', filename = 'myevent.js')}}"></script>
+    <script src="{{url_for('static', filename = 'formHandler.js')}}"></script>
+  </body>
+</html>
