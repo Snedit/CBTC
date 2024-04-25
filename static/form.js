@@ -22,7 +22,8 @@ async function submitForm() {
         var formData = {
             username: document.getElementById('name-field').value,
             email: document.getElementById('email').value,
-            password: document.getElementById('password').value
+            password: document.getElementById('password').value,
+            joined_events : []
         };
 
         fetch('/signup', {

@@ -5,10 +5,17 @@ function showForm() {
     heading.textContent = "Enter the event details";
     heading.id = "createEventHead";
     // Create a new form
-    formContainer.appendChild(heading);
+    const clsBtn = document.createElement('button');
     const form = document.createElement("form");
+    formContainer.appendChild(clsBtn);
+    clsBtn.textContent = "X";
+    clsBtn.addEventListener('click', ()=>{
+        document.querySelector(".specialForm").style.display = "none";
+    })
+    clsBtn.className = 'closeEvent';
     form.id = "new-event-form";
-
+    form.enctype = "multipart/form-data";
+    formContainer.appendChild(heading);
     // Basic fields
     const nameField = createTextBoxField("Event Name", "name");
     const descriptionField = createTextBoxField("Description", "description");
@@ -16,8 +23,8 @@ function showForm() {
     const objectiveField = createTextBoxField("Objective", "objective");
 
     // Image upload field
-    const imageField = createImageField("Event Images", "Enter the images of the event");
-
+    const imageField = createImageField("Event Images", "image");
+    const banner = createImageField("Banner Image", "image");
     // Extra services
     const extraServicesField = createInputField("Extra Services", "extra_services");
 
@@ -101,8 +108,11 @@ function createTextBoxField(labelText, fieldName) {
     const textarea = document.createElement("textarea");
 
     label.textContent = labelText;
+    label.style.display = "block";
     textarea.name = fieldName;
     textarea.rows = 1;
+    
+
     div.appendChild(label);
     div.appendChild(textarea);
     div.className = 'formField';
@@ -141,9 +151,9 @@ function createCustomInputField(labelText, fieldType, fieldName) {
 
 function addField() {
     const form = document.getElementById("new-event-form");
-    const fieldType = prompt("Enter field type (e.g., text, textarea, date, image):").toLowerCase();
+    const fieldType = (prompt("Enter field type (e.g., text, textarea, date, image):")).toLowerCase();
     const fieldLabel = prompt("Enter label for the new field:");
-    const fieldName = `custom_${Date.now()}`; // Unique field name
+    const fieldName = fieldLabel; // Unique field name
 
     let newField;
     if (fieldType === "textarea") {
@@ -163,3 +173,203 @@ function addField() {
     form.insertBefore(newField, form.querySelector("button[type='submit']"));
 }
 
+
+function submitEventForm(form) {
+    // Step 1: Retrieve form data using FormData
+    const formData = new FormData(form);
+
+    // Step 2: Convert FormData into a JavaScript object
+    const eventData = {};
+    formData.forEach((value, key) => {
+        eventData[key] = value;
+    });
+
+    // Step 3: Convert the JavaScript object to JSON
+    const jsonData = JSON.stringify(eventData);
+    console.log(jsonData);
+    // Step 4: Send JSON d ata to the backend using a POST request
+    // /* uncommment  here
+    fetch('/submit-event', {
+        method: 'POST',
+        // headers: {
+        //     'Content-Type': 'application/json'
+        // },
+        body: formData
+    })
+    .then(response => {
+        // Check if the response was successful
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Return the response data as JSON
+
+        return response.json();
+    })
+    .then(data => {
+        // Step 5: Handle the response from the backend
+        console.log('Response from backend:', data);
+         
+        // Optional: Display a success message or redirect the user
+        alert('Event submitted successfully! Unique code: ', data.unique_code);
+    })
+    .catch(error => {
+        // Step 6: Handle errors
+        console.error('Error submitting event form:', error);
+
+        // Optional: Display an error message to the user
+        alert('There was an error submitting the form. Please try again later.');
+    });
+     
+}
+
+
+
+function createEventOptions() {
+    // Find or create the div that will contain the buttons
+    const eventOptionsDiv = document.querySelector(".specialForm");
+    
+    if (!eventOptionsDiv) {
+        console.error("Div for event options not found.");
+        return;
+    }
+
+    // Clear existing content in the div
+    eventOptionsDiv.innerHTML = '';
+
+    // Create two buttons: Create New Event and Join Event
+    const createNewEventButton = document.createElement("button");
+    createNewEventButton.textContent = "Create New Event";
+    createNewEventButton.className = "createNewEventBtn";
+
+    const joinEventButton = document.createElement("button");
+    joinEventButton.textContent = "Join Event";
+    joinEventButton.className = "joinEventBtn";
+
+    // Append the buttons to the div
+    eventOptionsDiv.appendChild(createNewEventButton);
+    eventOptionsDiv.appendChild(joinEventButton);
+
+    // Handle the click event for "Create New Event"
+    createNewEventButton.addEventListener("click", () => {
+        // Call showForm() to display the event creation form
+        showForm();
+    });
+
+    // Handle the click event for "Join Event"
+    joinEventButton.addEventListener("click", () => {
+        // Add the logic for joining an event here
+        console.log("Join Event button clicked.");
+        showJoinEventForm();
+        // Additional logic can be added to join an existing event
+    });
+
+    // Display the div
+    eventOptionsDiv.style.display = "block"; // Make the div visible
+    eventOptionsDiv.style.opacity= "1"; 
+
+}
+
+// Add an event listener to the "Create Event" button
+document.querySelector(".createEventBtn").addEventListener("click", () => {
+    createEventOptions(); // Display the div with two buttons
+});
+
+function showJoinEventForm() {
+    // Get the special form container
+    const formContainer = document.querySelector(".specialForm");
+
+    // Clear existing content (if any)
+    formContainer.innerHTML = '';
+
+    // Create a heading for the form
+    const heading = document.createElement("h2");
+    heading.textContent = "Join an Event";
+    formContainer.appendChild(heading);
+
+    // Create the form element
+    const form = document.createElement("form");
+    form.id = "join-event-form";
+
+    // Create a field for entering the unique code
+    const uniqueCodeField = document.createElement("input");
+    uniqueCodeField.type = "text";
+    uniqueCodeField.name = "unique_code";
+    uniqueCodeField.placeholder = "Enter the unique code";
+
+    // Create a label for the unique code field
+    const uniqueCodeLabel = document.createElement("label");
+    uniqueCodeLabel.textContent = "Unique Code:";
+    uniqueCodeLabel.htmlFor = "unique_code";
+    uniqueCodeLabel.id = "uniqueLabel";
+    uniqueCodeField.id = "uniqueText";
+    // Create a submit button
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Join Event";
+    submitButton.id = "join-sub";
+    
+    // Append the label, input field, and submit button to the form
+    form.appendChild(uniqueCodeLabel);
+    form.appendChild(uniqueCodeField);
+    form.appendChild(submitButton);
+
+    // Append the form to the container
+    formContainer.appendChild(form);
+
+    // Make the form container visible
+    formContainer.style.display = "block"; // Show the form container
+    formContainer.style.opacity = "1"; // Optional: Add a smooth transition effect
+
+    // Handle form submission
+    form.onsubmit = function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const uniqueCode = uniqueCodeField.value; // Get the unique code from the input field
+        joinEvent(uniqueCode);
+        // Logic to handle the unique code submission
+        console.log("Joining event with unique code:", uniqueCode);
+
+        // You can add additional logic to send this data to the backend
+    };
+}
+
+function joinEvent(uniqueCode) {
+    // Prompt the user for the unique code
+    
+
+    // Prepare the request body
+    const requestData = {
+        unique_code: uniqueCode
+    };
+
+    // Send the POST request to join the event
+    fetch('/join-event', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)  // Convert to JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to join event');
+        }
+        return response.json();  // Parse the response JSON
+    })
+    .then(data => {
+        if (data.error) {
+            // Handle server-side errors
+            alert(`Error: ${data.error}`);
+        } else {
+            // Handle success response
+            
+            console.log("Successfully joined the event.");
+            document.getElementById("myevents").click();
+            // Optionally, update the UI to reflect that the user has joined the event
+        }
+    })
+    .catch(error => {
+        console.error('Error joining event:', error);
+        alert("There was an error joining the event. Please try again.");
+    });
+}

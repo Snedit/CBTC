@@ -12,11 +12,20 @@ data.forEach(myevent => {
     anchor.className = "eventLink";
     const img = document.createElement('img');
     img.className = "eventImg";
-    img.src = myevent.img;
+    const lastSlashIndex = (myevent.image_path).lastIndexOf('\\');
+
+// Get the substring after the last '/'
+const fileName = (myevent.image_path).slice(lastSlashIndex + 1); 
+    const rylSrc = "/static/images/" + fileName;
+    console.log(myevent.image_path);
+    img.src = rylSrc;
+
     const eventHead = document.createElement("p");
     const status = document.createElement('p');
-    status.textContent  = "Accepted";
+    status.textContent  = myevent.status;
     status.className = "status";
+    status.classList.add = myevent.status;
+
     eventHead.textContent = myevent.name;
     eventHead.className = "eventHead";
     anchor.appendChild(img);
@@ -44,7 +53,7 @@ const eventDIV = document.createElement("div");
     
     eventDIV.appendChild(anchor);
     container.appendChild(eventDIV);
-    anchor.addEventListener("click", ()=> {showForm()});
+    anchor.addEventListener("click", ()=> { createEventOptions()});
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -78,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
-
+/*
 function printDetailedEvent(Event)
 {
 
@@ -96,7 +105,7 @@ crossBtn.addEventListener("click", ()=>{
 
 const details = document.createElement("div");
 const eventImg  = document.createElement("img");
-eventImg.src = Event.img;
+eventImg.src = Event.image_path;
 
 details.className = "eventDetails";
 const date = document.createElement("div");
@@ -104,8 +113,8 @@ date.className = "eventDate";
 const status = document.createElement("div");
 status.className = "eventStatus";
 eventName.textContent = Event.name;
-details.textContent = Event.des;
-date.textContent = Event.time;
+details.textContent = Event.description;
+date.textContent = Event.created_at;
 mainForm.appendChild(eventName);
 mainForm.appendChild(crossBtn);
 
@@ -127,6 +136,104 @@ setTimeout(() => {
 }, 1500);
 // add other details as well    
 }
+*/
+
+function printDetailedEvent(Event) {
+    const mainForm = document.querySelector(".specialForm");
+    mainForm.innerHTML = ''; // Clear previous content
+    mainForm.classList.add("printingEvent");
+    
+    // Banner image (optional, if Event contains a specific field for this)
+    const bannerImg = document.createElement("img");
+    bannerImg.className = "banner-img"; // Custom class for styling
+    if (Event.banner_path) { // Assuming the banner image is stored in a field called 'banner_path'
+        bannerImg.src = Event.banner_path; // Set the banner image source
+    }
+
+    const eventName = document.createElement("h2");
+    eventName.className = "eventName";
+    eventName.textContent = Event.name; // Assuming 'name' is always present
+
+    // Close button
+    const crossBtn = document.createElement("button");
+    crossBtn.textContent = "X";
+    crossBtn.className = "closeEvent";
+    crossBtn.addEventListener("click", () => {
+        closeSpecialForm();
+        
+    });
+
+    // Add the banner image and event name at the top
+    mainForm.appendChild(bannerImg);
+    mainForm.appendChild(eventName);
+    mainForm.appendChild(crossBtn);
+    const entries = Object.entries(Event).reverse();
+    // Loop through the Event dictionary to create elements for each key-value pair
+    for (const [key, value] of entries) {
+        // Skip fields you don't want to display, like ObjectId fields or hidden data
+        if (key === "user_id" || key === "_id" || key==='image_path' || key  ==='name' || value === "") {
+            continue;
+        }
+        
+        const detailDiv = document.createElement("div");
+        detailDiv.className = `event-${key}`; // Classname based on the key
+        detailDiv.innerHTML = `<strong>${key.toUpperCase()}:</strong> ${value}`; // Display the key and value
+        mainForm.appendChild(detailDiv); // Add to the main container
+    }
+
+
+    if (Event.status === "owner") {
+        fetchParticipantDetails(Event.unique_code).then((participants) => {
+            if (participants.length > 0) {
+                const participantDiv = document.createElement("div");
+                participantDiv.className = "participants";
+
+                const participantTitle = document.createElement("h3");
+                participantTitle.textContent = "Participants";
+                participantDiv.appendChild(participantTitle);
+
+                // Loop through participants and create elements for them
+                participants.forEach((participant) => {
+                    const participantDetail = document.createElement("div");
+                    participantDetail.className = "participant";
+                    participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
+                        <br> <strong>Email:</strong> ${participant.email}
+                        <br> <strong>Status:</strong> ${participant.status}`;
+                    participantDiv.appendChild(participantDetail);
+                });
+
+                mainForm.appendChild(participantDiv);
+            } else {
+                const noParticipants = document.createElement("p");
+                noParticipants.textContent = "No participants have joined yet.";
+                mainForm.appendChild(noParticipants);
+            }
+        });
+    }
+        
+    document.querySelector("#ufo").style.display = "block";
+    setTimeout(() => {
+        document.querySelector("#ufo").style.display = "none";
+    }, 5000);
+
+    mainForm.style.display = "block";
+    setTimeout(() => {
+        mainForm.style.opacity = "1";
+    }, 1500);
+}
+
+ async function fetchParticipantDetails(unique_code) {
+    try {
+         const response = await fetch(`/participants?event_code=${unique_code}`);
+         if (!response.ok) {
+             throw new Error("Failed to fetch participants");
+         }
+         return await response.json();
+     } catch (error) {
+         console.error("Error fetching participants:", error);
+         return [];
+     }
+}
 
 function closeSpecialForm()
 {const mainForm = document.querySelector(".specialForm");
@@ -144,7 +251,7 @@ setTimeout(() => {
         
         document.querySelector("#ufo").style.display = "none";
         mainForm.style.display= 'none';
-
+        mainForm.classList.remove("printingEvent");
 
     }, 4000);
 
