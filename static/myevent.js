@@ -190,6 +190,7 @@ function printDetailedEvent(Event) {
 
                 const participantTitle = document.createElement("h3");
                 participantTitle.textContent = "Participants";
+                participantTitle.className = "participantHead";
                 participantDiv.appendChild(participantTitle);
 
                 // Loop through participants and create elements for them
@@ -198,7 +199,7 @@ function printDetailedEvent(Event) {
                     participantDetail.className = "participant";
                     participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
                         <br> <strong>Email:</strong> ${participant.email}
-                        <br> <strong>Status:</strong> ${participant.status}`;
+                        <br> <strong>Status:</strong> <span class="status ${participant.status}">${participant.status} </span>` ;
                     participantDiv.appendChild(participantDetail);
                 });
 

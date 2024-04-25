@@ -151,11 +151,10 @@
     font-size: 1.4rem;
     padding-left: 5px;
     padding-right: 5px;
-    border: 1px solid green;
     border-radius: 4px;
     width: fit-content;
     margin: auto;
-    background-color: limegreen;
+    
 
 }
 
@@ -440,3 +439,34 @@ color: black;
     left: 45%;
     transform: translate(-50%, -50%);
 } */
+
+.pending{
+    background-color: rgb(111 15 151);
+    border: 1px solid #8181ff;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 3px lightcyan;
+}
+
+.accepted{
+    border: 1px solid green;
+    background-color: limegreen;
+    color: white;
+
+}
+.rejected{
+border: crimson;
+background-color: lightcoral;
+color: #fff;
+}
+
+.participantHead{
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgb(156, 46, 215);
+}
