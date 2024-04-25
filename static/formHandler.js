@@ -270,9 +270,9 @@ function createEventOptions() {
 }
 
 // Add an event listener to the "Create Event" button
-document.querySelector(".createEventBtn").addEventListener("click", () => {
-    createEventOptions(); // Display the div with two buttons
-});
+// document.querySelector(".createEventBtn").addEventListener("click", () => {
+//     createEventOptions(); // Display the div with two buttons
+// });
 
 function showJoinEventForm() {
     // Get the special form container
@@ -362,8 +362,8 @@ function joinEvent(uniqueCode) {
             alert(`Error: ${data.error}`);
         } else {
             // Handle success response
-            
             console.log("Successfully joined the event.");
+            document.querySelector(".specialForm").display = "none";
             document.getElementById("myevents").click();
             // Optionally, update the UI to reflect that the user has joined the event
         }

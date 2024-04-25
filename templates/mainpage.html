@@ -20,6 +20,10 @@
       rel="stylesheet"
       href="{{url_for('static', filename = 'mainpage.css')}}"
     />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'profile.css')}}"
+    />
   </head>
   <body>
     <div id="coverPic">
@@ -64,6 +68,20 @@
             <div id="listofevents"></div>
           </section>
         </div>
+
+        <div id="profileTab">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, minima
+          autem praesentium consectetur reprehenderit atque quos eveniet sed ea
+          provident quae repellat beatae quibusdam voluptas illum alias aliquid
+          explicabo officia.
+          <div id="pp">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLPpm5qa_1W_KGAYsp1fHk9_PkhN338hDgeiMg5hWPQ&s"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
       </section>
     </div>
 
@@ -71,5 +89,6 @@
     <script src="{{url_for('static', filename = 'mainpage.js')}}"></script>
     <script src="{{url_for('static', filename = 'myevent.js')}}"></script>
     <script src="{{url_for('static', filename = 'formHandler.js')}}"></script>
+    <script src="{{url_for('static', filename = 'profile.js')}}"></script>
   </body>
 </html>

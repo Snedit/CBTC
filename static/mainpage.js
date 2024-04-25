@@ -20,6 +20,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+function myAccount()
+{
+hideEvent();
+hideTrending();
+hideNotify();
+document.querySelector("#MyEventTab").style.display = "block";
+setTimeout(() => {
+    
+    document.querySelector("#MyEventTab").style.opacity= "1";
+}, 100);
+
+}
+
+
 function hideTrending()
 {
     document.querySelector("#trendTab").style.opacity= 0;
@@ -32,7 +46,7 @@ function showTrending()
 {
     hideEvent();
     hideNotify();
-    
+    hideAccount();    
     document.querySelector("#trendTab").style.display = "block";
     setTimeout(() => {
         document.querySelector("#trendTab").style.opacity= "1";
@@ -42,6 +56,7 @@ function showTrending()
 function showEvent()
 {
 hideTrending();
+hideAccount();
 document.querySelector("#MyEventTab").style.display = "block";
 setTimeout(() => {
     
@@ -52,8 +67,19 @@ function showNotify()
 {
 
 }
-function myAccount()
+function hideNotify()
 {
+
+}
+
+function hideAccount()
+{
+
+    document.querySelector("#profileTab").style.opacity= "0";
+    setTimeout(() => {
+        
+        document.querySelector("#profileTab").style.display = "none";
+    }, 100);
 
 }
 
@@ -66,8 +92,4 @@ function hideEvent()
     }, 100);
 }
 
-function hideNotify()
-{
-
-}
 

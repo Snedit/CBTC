@@ -230,8 +230,8 @@ def submit_event():
         return jsonify({"error": str(e)}), 500  # Internal Server Error
 
 
-
 @app.route('/join-event', methods=['POST'])
+@login_required
 def join_event():
     # Retrieve user ID from session
     user_id = ObjectId(session.get("userID"))

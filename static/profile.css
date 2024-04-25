@@ -1,0 +1,16 @@
+#profileTab{
+    padding-top: 100px;
+}
+
+#pp{
+    width: 10em;
+    height: 10em;
+margin: auto;
+}
+#pp img{
+    width: 100%;
+
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 10px cyan;
+}
