@@ -199,8 +199,22 @@ function printDetailedEvent(Event) {
                     participantDetail.className = "participant";
                     participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
                         <br> <strong>Email:</strong> ${participant.email}
-                        <br> <strong>Status:</strong> <button onclick="" class="drs status ${participant.status}">${participant.status} </button>
-                        <div class="decision"></div>
+                        <br> <strong>Status:</strong> <button id="${participant.email}" class="drs status ${participant.status}">${participant.status} </button>
+    // <div class="status-options" style="display: none;">
+    //         <label>
+    //             <input type="radio" name="status-${email}" value="Accepted" ${currentStatus === 'Accepted' ? 'checked' : ''}>
+    //             Accepted
+    //         </label>
+    //         <label>
+    //             <input type="radio" name="status-${email}" value="Rejected" ${currentStatus === 'Rejected' ? 'checked' : ''}>
+    //             Rejected
+    //         </label>
+    //         <label>
+    //             <input type="radio" name="status-${email}" value="Pending" ${currentStatus === 'Pending' ? 'checked' : ''}>
+    //             Pending
+    //         </label>
+    //     </div>
+
                         ` ;
                         
                     participantDiv.appendChild(participantDetail);
