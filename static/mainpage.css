@@ -154,7 +154,8 @@
     border-radius: 4px;
     width: fit-content;
     margin: auto;
-    
+    border: 1px solid green;
+    background-color: limegreen;
 
 }
 
@@ -470,3 +471,4 @@ color: #fff;
     margin-bottom: 10px;
     text-shadow: 0 0 10px rgb(156, 46, 215);
 }
+

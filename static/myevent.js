@@ -199,7 +199,10 @@ function printDetailedEvent(Event) {
                     participantDetail.className = "participant";
                     participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
                         <br> <strong>Email:</strong> ${participant.email}
-                        <br> <strong>Status:</strong> <span class="status ${participant.status}">${participant.status} </span>` ;
+                        <br> <strong>Status:</strong> <button onclick="" class="drs status ${participant.status}">${participant.status} </button>
+                        <div class="decision"></div>
+                        ` ;
+                        
                     participantDiv.appendChild(participantDetail);
                 });
 
