@@ -184,7 +184,7 @@ def generate_unique_code():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
 
-UPLOAD_FOLDER = 'static/images'
+UPLOAD_FOLDER = '/static/images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -314,6 +314,77 @@ def get_participants():
                         })
 
     return jsonify(participants), 200  # Success
+
+@app.route('/get-user-profile', methods=['GET'])
+@login_required
+def get_user_profile():
+    user_id = session.get("userID")
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401
+    
+    user = records.find_one({"_id": ObjectId(user_id)})
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Check if 'personal_details' exists and fetch the relevant data
+    personal_details = user.get("personal_details", {})
+    print(personal_details)
+    return jsonify({
+        "name": user.get("username", ""),
+        "email": user.get("email", ""),
+        "profilePic": user.get("profilePic", ""),
+        "personal_details": personal_details,
+    }), 200
+
+
+@app.route('/update-participant-status', methods=['POST'])
+@login_required
+def update_participant_status():
+    
+    user_id = session.get("userID")
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401  # Unauthorized
+
+    data = request.json
+    email = data.get("email")
+    new_status = data.get("newStatus")
+    event_unique_code = data.get("eventUniqueCode")
+    print("email: ", email, "new_status: ", new_status, "code: ", event_unique_code)
+    if not email or not new_status or not event_unique_code:
+        return jsonify({"error": "Missing required data"}), 400  # Ensure all required fields are present
+
+    try:
+        # Retrieve the user ID based on the email
+        user = records.find_one({"email": email})
+        if not user:
+            return jsonify({"error": "User not found"}), 404  # Email not found
+
+        user_object_id = user["_id"]
+
+        # Find the event by its unique code
+        event = records.find_one({"unique_code": event_unique_code})
+        if not event:
+            return jsonify({"error": "Event not found"}), 404  # Ensure event exists
+
+        # Ensure the current user is the event owner
+        if ObjectId(user_id) != event.get("user_id"):
+            return jsonify({"error": "You are not authorized to update this event"}), 403  # Forbidden
+
+        # Update the joinedUsers list to change the participant's status
+        result = records.update_one(
+            {"unique_code": event_unique_code, "joined_users.user_id": user_object_id},
+            {"$set": {"joined_users.$.status": new_status}}
+        )
+
+        if result.matched_count == 0:
+            return jsonify({"error": "Participant not found in the event"}), 404  # Participant not found
+        
+        return jsonify({"message": f"Status updated to {new_status}"}), 200  # Success
+
+    except pymongo.errors.PyMongoError as e:
+        return jsonify({"error": str(e)}), 500  # Internal Server Error
+
+
 
 
 if(__name__ == "__main__"):

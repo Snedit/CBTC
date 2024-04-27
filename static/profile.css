@@ -14,3 +14,93 @@ margin: auto;
     border-radius: 50%;
     box-shadow: 0 0 10px cyan;
 }
+.profileDetails{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    border: 2px solid rgb(60, 0, 139);
+    width: fit-content;
+    min-height: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 400px;
+    box-shadow: 0 0 10px rgb(71, 136, 222);
+    
+}
+
+#userInfo
+{
+    font-size: 2rem;
+}
+#personalDetailsForm
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+
+}
+.profileForm{
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    border: 2px solid rgb(209, 23, 251);
+    font-size: 2rem;
+    width: fit-content;
+}
+.profileForm h2{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.loader img, .loader{
+    
+
+    animation-name: load;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition: all 2s;
+}
+@keyframes load {
+    0%{
+        box-shadow: 0 0 10px rgb(230, 193, 173), 0 0 15px rgb(255, 224, 224);
+    }
+    50%{
+        
+        box-shadow: 0 0 10px crimson, 0 0 15px lightcoral;
+    }
+    100%{
+        
+        box-shadow: 0 0 10px rgb(205, 63, 63), 0 0 15px rgb(255, 138, 123);
+    }
+}
+
+#edit-profile{
+    margin-top: 10px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+#personalDetailsForm input{
+    color: black;
+    border: 1px solid darkblue;
+    border-radius: 10px;
+    padding: 3px;
+    width: fit-content;
+    
+}
+
+.profileForm input, textarea{
+color: black;
+margin: auto;
+width: fit-content;
+padding: 10px;
+}
+#pp img{
+    float: left;
+}

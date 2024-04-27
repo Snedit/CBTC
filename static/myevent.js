@@ -1,3 +1,88 @@
+// Function to handle the status button click
+function processStatus(button, eventUniqueCode) {
+    alert("works");
+    const statusChangeDiv = document.getElementById("statusChangeDiv");
+
+    // Position the div relative to the clicked button
+    const rect = button.getBoundingClientRect();
+    statusChangeDiv.style.left = `${rect.left}px`;
+    statusChangeDiv.style.top = `${rect.bottom}px`;
+    statusChangeDiv.style.display = "block"; // Make it visible
+
+    // Store context for later use
+    statusChangeDiv.dataset.email = button.id; // Store the participant's email
+    statusChangeDiv.dataset.currentStatus = button.textContent.trim(); // Store the current status
+    statusChangeDiv.dataset.eventUniqueCode = eventUniqueCode; // Store the event's unique code
+}
+
+// Function to handle status change confirmation
+function confirmStatusChange() {
+    const statusChangeDiv = document.getElementById("statusChangeDiv");
+
+    const email = statusChangeDiv.dataset.email; // Get the participant's email
+    const eventUniqueCode = statusChangeDiv.dataset.eventUniqueCode; // Event's unique code
+    const newStatus = document.querySelector("input[name='status']:checked").value; // Selected status
+
+    const currentStatus = statusChangeDiv.dataset.currentStatus;
+    if (currentStatus === newStatus) {
+        statusChangeDiv.style.display = "none"; // No change, hide the div
+        return;
+    }
+
+    const confirmChange = confirm(`Change status from ${currentStatus} to ${newStatus}?`);
+    if (confirmChange) {
+        dataTosend = {
+            "email": email,
+            "eventUniqueCode" : eventUniqueCode,
+            "newStatus" : newStatus
+        }
+        fetch("/update-participant-status", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataTosend),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to update status");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Status updated:", data);
+            alert(`Status updated to ${newStatus}`);
+            statusChangeDiv.style.display = "none"; // Hide the div after confirmation
+            location.reload(); // Refresh the page to reflect changes
+        })
+        .catch((err) => {
+            console.error("Error updating status:", err);
+        });
+    } else {
+        statusChangeDiv.style.display = "none"; // Hide the div if the user cancels
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const confirmButton = document.getElementById("confirmStatusChange");
+
+    // Handle confirmation of status change
+    confirmButton.addEventListener("click", confirmStatusChange);
+
+    // Hide the status change div if clicking outside it
+    document.addEventListener("click", function (event) {
+        const statusChangeDiv = document.getElementById("statusChangeDiv");
+
+        if (
+            !statusChangeDiv.contains(event.target) &&
+            !event.target.closest(".lifechangingbtn")
+        ) {
+            statusChangeDiv.style.display = "none"; // Hide if clicking outside
+        }
+    });
+});
+
+
 
 function displayMyEvents(data){
 
@@ -24,7 +109,7 @@ const fileName = (myevent.image_path).slice(lastSlashIndex + 1);
     const status = document.createElement('p');
     status.textContent  = myevent.status;
     status.className = "status";
-    status.classList.add = myevent.status;
+    status.classList.add(myevent.status);
 
     eventHead.textContent = myevent.name;
     eventHead.className = "eventHead";
@@ -63,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add click event listener to the "My Events" link
     myEventsLink.addEventListener('click', function (event) {
         event.preventDefault(); // Prevent default link behavior
-
+        document.querySelector("#listofevents").classList.add("loader");
         // Send a GET request to the Flask backend
         fetch('/myevents')
             .then(response => {
@@ -76,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 // Handle successful response
-                
+                document.querySelector("#listofevents").classList.remove("loader");
                 console.log('My Events:', data);
                 displayMyEvents(data);
                 // Update UI with fetched data (e.g., display in a modal, update a list, etc.)
@@ -197,11 +282,12 @@ function printDetailedEvent(Event) {
                 participants.forEach((participant) => {
                     const participantDetail = document.createElement("div");
                     participantDetail.className = "participant";
+                    
                     participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
                         <br> <strong>Email:</strong> ${participant.email}
-                        <br> <strong>Status:</strong> <button id="${participant.email}" class="drs status ${participant.status}">${participant.status} </button>
+                        <br> <strong>Status:</strong> <button id="${participant.email}" onclick="processStatus(this, '${Event.unique_code}')" class="lifechangingbtn drs status ${participant.status}">${participant.status} </button>
                         ` ;
-                        
+                        // document.querySelector(`#${participant.email}`).addEventListener('click', ()=>{processStatus(this, Event.unique_code)});
                     participantDiv.appendChild(participantDetail);
                 });
 
@@ -259,3 +345,7 @@ setTimeout(() => {
     }, 4000);
 
 }
+
+
+
+

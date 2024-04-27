@@ -63,23 +63,90 @@
               alt=""
               srcset=""
             />
+
+            <div
+              id="statusChangeDiv"
+              class="status-change-div"
+              style="display: block"
+            >
+              <h3>Change Participant Status</h3>
+              <label>
+                <input type="radio" name="status" value="Pending" /> Pending
+              </label>
+              <label>
+                <input type="radio" name="status" value="Accepted" /> Accepted
+              </label>
+              <label>
+                <input type="radio" name="status" value="Rejected" /> Rejected
+              </label>
+              <button id="confirmStatusChange">Confirm</button>
+            </div>
             <div class="specialForm"></div>
+
             <div class="eventOptions"></div>
             <div id="listofevents"></div>
           </section>
         </div>
 
         <div id="profileTab">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, minima
-          autem praesentium consectetur reprehenderit atque quos eveniet sed ea
-          provident quae repellat beatae quibusdam voluptas illum alias aliquid
-          explicabo officia.
-          <div id="pp">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLPpm5qa_1W_KGAYsp1fHk9_PkhN338hDgeiMg5hWPQ&s"
-              alt=""
-              srcset=""
-            />
+          <!-- Profile Picture and Basic Information -->
+          <div class="profileDetails">
+            <div id="pp">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLPpm5qa_1W_KGAYsp1fHk9_PkhN338hDgeiMg5hWPQ&s"
+                alt="Profile Picture"
+              />
+            </div>
+            <div id="userInfo">
+              <p><strong>Name:</strong> <span id="userName"></span></p>
+              <p><strong>Email:</strong> <span id="userEmail"></span></p>
+
+              <div id="additionalDetails"></div>
+            </div>
+            <!-- Edit Profile Button -->
+            <!-- <button id="editProfileButton">Edit Profile</button> -->
+          </div>
+
+          <!-- Form for Updating Personal Details -->
+          <div class="profileForm" style="display: none">
+            <h2>Edit your profile</h2>
+            <button id="backToProfile" onclick="toggleEditForm()">
+              Go back to Profile
+            </button>
+            <form id="personalDetailsForm">
+              <label>
+                Date of Birth:
+                <input type="date" name="dob" />
+              </label>
+              <label>
+                Phone Number:
+                <input type="tel" name="phone" />
+              </label>
+              <label>
+                About:
+                <textarea name="about"></textarea>
+              </label>
+              <label>
+                LinkedIn:
+                <input type="url" name="linkedin" />
+              </label>
+              <label>
+                GitHub:
+                <input type="url" name="github" />
+              </label>
+              <label>
+                Profile Picture:
+                <input type="file" name="profilePic" accept="image/*" />
+              </label>
+              <label>
+                Account Type:
+                <select name="accountType">
+                  <option value="user">User</option>
+                  <option value="services">Services</option>
+                </select>
+              </label>
+              <button type="submit">Update</button>
+            </form>
           </div>
         </div>
       </section>

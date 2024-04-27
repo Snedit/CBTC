@@ -25,10 +25,10 @@ function myAccount()
 hideEvent();
 hideTrending();
 hideNotify();
-document.querySelector("#MyEventTab").style.display = "block";
+document.querySelector("#profileTab").style.display = "block";
 setTimeout(() => {
     
-    document.querySelector("#MyEventTab").style.opacity= "1";
+    document.querySelector("#profileTab").style.opacity= "1";
 }, 100);
 
 }

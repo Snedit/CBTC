@@ -441,7 +441,7 @@ color: black;
     transform: translate(-50%, -50%);
 } */
 
-.pending{
+.pending, .Pending{
     background-color: rgb(111 15 151);
     border: 1px solid #8181ff;
     color: white;
@@ -449,13 +449,13 @@ color: black;
     box-shadow: 0 0 3px lightcyan;
 }
 
-.accepted{
+.accepted, .Accepted{
     border: 1px solid green;
     background-color: limegreen;
     color: white;
 
 }
-.rejected{
+.rejected, .Rejected{
 border: crimson;
 background-color: lightcoral;
 color: #fff;
@@ -476,4 +476,57 @@ color: #fff;
 #profileTab{
     /* opacity: 0;
     display: none; */
+}
+.profileForm{
+    position: absolute;
+    opacity: 0;
+    display: none;
+    left: 50%;
+    transition: all 1s;
+    top:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px magenta;
+    border-radius: 10px;
+}
+
+.profileDetails{
+    transition: all 1s;
+}
+
+#backToProfile
+{
+    position: fixed;
+    padding: 10px;
+    border: 2px solid magenta;
+    background-color: transparent;
+    left: -40%;
+    border-radius: 10px;
+    transition: all 1s;
+}
+
+#backToProfile:hover{
+    color: wheat;
+    background-color: rgba(246, 8, 246, 0.662);
+}
+#profileTab
+{
+ display: none;   
+ opacity: 0;
+}
+
+.specialForm{
+    margin-top: 200px;
+}
+
+
+#statusChangeDiv{
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+z-index: 123526;
+background-color: #444;
+border: 2px solid #8181ff;
+height: fit-content;
+
 }
