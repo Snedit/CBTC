@@ -386,7 +386,50 @@ def update_participant_status():
 
 
 
+@app.route('/profile', methods=['GET'])
+@login_required
+def get_user_newPage():
+    user_id = session.get("userID")
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401  # Unauthorized
+
+    # Get the username from the query parameters
+    username = request.args.get("username")
+    if not username:
+        return jsonify({"error": "Username is required"}), 400  # Bad Request
+ 
+    try:
+        # Find the profile user by username
+        profile_user = records.find_one({"username": username})
+        if not profile_user:
+            return jsonify({"error": "User not found"}), 404  # User not found
+
+        # Find events owned by the current user
+        owner_events = list(records.find({"user_id": ObjectId(user_id)}))
+
+        # Check if the profile user is a participant in any of the owner's events
+        is_participant = any(
+            any(ju.get("user_id") == profile_user["_id"] for ju in event.get("joined_users", []))
+            for event in owner_events
+        )
+
+        if not is_participant:
+            return jsonify({"error": "Unauthorized access"}), 403  # Forbidden if not a participant
+
+        # If the check passes, return the profile details
+        profile_details = {
+            "username": profile_user.get("username", ""),
+            "email": profile_user.get("email", ""),
+            "profilePic": profile_user.get("profilePic", ""),
+            "personal_details": profile_user.get("personal_details", {}),
+        }
+
+        return render_template('profile.html', profile=profile_details) # Success
+
+    except pymongo.errors.PyMongoError as e:
+        return jsonify({"error": str(e)}), 500  # Internal Server Error
+
 
 if(__name__ == "__main__"):
-    app.run(debug=True)
+    app.run( debug=True)
 

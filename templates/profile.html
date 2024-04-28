@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile of {{ profile.username }}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='personaldetails.css')}}"
+    />
+    <!-- Link to CSS -->
+
+    <!-- Link to JS -->
+  </head>
+  <body>
+    <div class="profile">
+      <img src="{{ profile.profilePic or
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLPpm5qa_1W_KGAYsp1fHk9_PkhN338hDgeiMg5hWPQ&s"
+      }}" alt="{{ profile.username }}'s Profile Picture" class="profile-picture"
+      />
+      <h1>{{ profile.username }}</h1>
+      <p id="mail"><strong>Email:</strong> {{ profile.email }}</p>
+
+      <!-- Display personal details if available -->
+      <div class="personal-details">
+        {% if profile.personal_details %}
+        <h2 id="pd">Personal Details</h2>
+        <ul>
+          {% for key, value in profile.personal_details.items() %} {% set
+          display_key = key %} {% if key == 'accountType' %} {% set display_key
+          = 'Account Type' %} {% endif %}
+          <li><strong>{{ display_key | capitalize }}:</strong> {{ value }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No additional personal details available.</p>
+        {% endif %}
+      </div>
+    </div>
+    <script src="{{url_for('static', filename='personaldetails.js')}}"></script>
+  </body>
+</html>

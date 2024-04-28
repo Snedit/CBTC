@@ -223,6 +223,58 @@ setTimeout(() => {
 }
 */
 
+
+// Function to fetch the user profile based on a provided username
+// function fetchUserProfile(username) {
+//     // Construct the URL with query parameter for the username
+//     const profileUrl = `/profile?username=${encodeURIComponent(username)}`;
+
+//     fetch(profileUrl)
+//         .then((response) => {
+//             if (!response.ok) {
+//                 throw new Error(`Failed to fetch profile: ${response.statusText}`);
+//             }
+//             return response.json(); // Parse the JSON response
+//         })
+//         .then((data) => {
+//             // Process the fetched profile data
+//             console.log("Profile data:", data);
+
+//             // Update the UI with the fetched profile information
+//             document.getElementById("userName").textContent = data.username;
+//             document.getElementById("userEmail").textContent = data.email;
+
+//             const profilePic = data.profilePic || "default-profile-pic.jpg"; // Default image
+//             document.getElementById("profilePicture").src = profilePic;
+
+//             const personalDetails = data.personal_details;
+//             if (Object.keys(personalDetails).length > 0) {
+//                 // Display personal details in a suitable container
+//                 const detailsContainer = document.getElementById("personalDetailsContainer");
+//                 detailsContainer.innerHTML = ""; // Clear existing content
+
+//                 for (const [key, value] of Object.entries(personalDetails)) {
+//                     const detailItem = document.createElement("div");
+//                     detailItem.innerHTML = `<strong>${key.toUpperCase()}:</strong> ${value}`;
+//                     detailsContainer.appendChild(detailItem);
+//                 }
+//             }
+//         })
+//         .catch((err) => {
+//             console.error("Error fetching profile:", err);
+//             alert("An error occurred while fetching the profile. Please try again later.");
+//         });
+// }
+
+function fetchUserProfile(username) {
+    // Construct the URL for the profile, including the username as a query parameter
+    const profileUrl = `/profile?username=${encodeURIComponent(username)}`;
+
+    // Open a new tab with the specified URL
+    window.open(profileUrl, '_blank'); // `_blank` opens in a new tab
+}
+
+
 function printDetailedEvent(Event) {
     const mainForm = document.querySelector(".specialForm");
     mainForm.innerHTML = ''; // Clear previous content
@@ -283,7 +335,7 @@ function printDetailedEvent(Event) {
                     const participantDetail = document.createElement("div");
                     participantDetail.className = "participant";
                     
-                    participantDetail.innerHTML = `<strong>Username:</strong> ${participant.username} 
+                    participantDetail.innerHTML = `<strong>Username:</strong> <a onclick="fetchUserProfile('${participant.username}')" class="userProfile">${participant.username}</a> 
                         <br> <strong>Email:</strong> ${participant.email}
                         <br> <strong>Status:</strong> <button id="${participant.email}" onclick="processStatus(this, '${Event.unique_code}')" class="lifechangingbtn drs status ${participant.status}">${participant.status} </button>
                         ` ;
