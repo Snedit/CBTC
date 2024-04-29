@@ -44,6 +44,7 @@ function showForm() {
     submitButton.className = "eventSub";
     // Append fields to the form
     form.appendChild(nameField);
+    form.appendChild(banner);
     form.appendChild(descriptionField);
     form.appendChild(dateField);
     form.appendChild(objectiveField);
